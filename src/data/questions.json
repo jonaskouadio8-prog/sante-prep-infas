@@ -1,0 +1,107 @@
+[
+  {
+    "id": "q1",
+    "level": "BAC",
+    "filiere": ["Infirmiers", "Sage-femme"],
+    "subject": "Biologie_SVT",
+    "text": "Quel organite cellulaire est le siège principal de la respiration cellulaire et de la production d'ATP ?",
+    "options": ["L'appareil de Golgi", "La mitochondrie", "Le réticulum endoplasmique rugueux", "Le lysosome"],
+    "correctAnswerIndex": 1,
+    "explanation": "La mitochondrie est la centrale énergétique de la cellule produisant l'ATP par phosphorylation oxydative."
+  },
+  {
+    "id": "q2",
+    "level": "BAC",
+    "filiere": ["Infirmiers", "Sage-femme"],
+    "subject": "Francais",
+    "text": "Identifiez la phrase correctement orthographiée :",
+    "options": [
+      "Les infirmières se sont succédées à l'hôpital.",
+      "Les infirmières se sont succédé à l'hôpital.",
+      "Les infirmières se sont succédéent à l'hôpital.",
+      "Les infirmières se sont succendées à l'hôpital."
+    ],
+    "correctAnswerIndex": 1,
+    "explanation": "Le verbe se succéder est intransitif indirect, son participe passé est donc invariable."
+  },
+  {
+    "id": "q3",
+    "level": "BAC",
+    "filiere": ["Infirmiers", "Sage-femme", "TBM", "TIM", "TMK", "THA", "PGP", "TBIO", "ORTHO"],
+    "subject": "Culture_Generale",
+    "text": "Quel organisme international spécialisé de l'ONU est responsable de la santé publique mondiale ?",
+    "options": ["L'UNICEF", "L'UNESCO", "L'OMS (Organisation Mondiale de la Santé)", "La FAO"],
+    "correctAnswerIndex": 2,
+    "explanation": "L'OMS, fondée en 1948, est l'agence spécialisée des Nations unies pour la santé publique."
+  },
+  {
+    "id": "q4",
+    "level": "BAC",
+    "filiere": ["TBM", "TIM", "TMK", "THA", "PGP", "TBIO", "ORTHO"],
+    "subject": "Physique_Chimie",
+    "text": "Quel est le pH d'une solution neutre à 25°C ?",
+    "options": ["0", "7", "10", "14"],
+    "correctAnswerIndex": 1,
+    "explanation": "À 25°C, une solution neutre a un pH de 7, où [H+] = [OH-] = 10^-7 mol/L."
+  },
+  {
+    "id": "q5",
+    "level": "BEPC",
+    "filiere": ["Infirmiers", "Sage-femme"],
+    "subject": "Biologie_SVT",
+    "text": "Combien de chromosomes possède un être humain ?",
+    "options": ["23", "46", "48", "92"],
+    "correctAnswerIndex": 1,
+    "explanation": "L'être humain possède 46 chromosomes (23 paires) : 22 paires d'autosomes et 1 paire de chromosomes sexuels."
+  },
+  {
+    "id": "q6",
+    "level": "BEPC",
+    "filiere": ["Infirmiers", "Sage-femme"],
+    "subject": "Francais",
+    "text": "Quel est le synonyme du mot 'tenace' ?",
+    "options": ["Mou", "Persévérant", "Fragile", "Élastique"],
+    "correctAnswerIndex": 1,
+    "explanation": "Tenace signifie persévérant, déterminé et résistant."
+  },
+  {
+    "id": "q7",
+    "level": "BEPC",
+    "filiere": ["Infirmiers", "Sage-femme", "TBM", "TIM", "TMK", "THA", "PGP", "TBIO", "ORTHO"],
+    "subject": "Culture_Generale",
+    "text": "Quel est le nombre de continents sur Terre ?",
+    "options": ["5", "6", "7", "8"],
+    "correctAnswerIndex": 2,
+    "explanation": "Il y a 7 continents : l'Afrique, l'Amérique du Nord, l'Amérique du Sud, l'Antarctique, l'Asie, l'Europe et l'Océanie."
+  },
+  {
+    "id": "q8",
+    "level": "BEPC",
+    "filiere": ["TBM", "TIM", "TMK", "THA", "PGP", "TBIO", "ORTHO"],
+    "subject": "Mathematiques",
+    "text": "Quel est le résultat de 15 × 12 ?",
+    "options": ["160", "170", "180", "190"],
+    "correctAnswerIndex": 2,
+    "explanation": "15 × 12 = 180. On peut calculer : 15 × 10 + 15 × 2 = 150 + 30 = 180."
+  },
+  {
+    "id": "q9",
+    "level": "BAC",
+    "filiere": ["Infirmiers", "Sage-femme"],
+    "subject": "Culture_Generale",
+    "text": "Quel est le capital de la Côte d'Ivoire ?",
+    "options": ["Abidjan", "Yamoussoukro", "Bouaké", "Daloa"],
+    "correctAnswerIndex": 1,
+    "explanation": "Yamoussoukro est le capital politique et administrative de la Côte d'Ivoire depuis 1983, bien qu'Abidjan soit la capitale économique."
+  },
+  {
+    "id": "q10",
+    "level": "BAC",
+    "filiere": ["TBM", "TIM", "TMK", "THA", "PGP", "TBIO", "ORTHO"],
+    "subject": "Biologie_SVT",
+    "text": "Quel est le rôle principal du système nerveux central ?",
+    "options": ["Transporter l'oxygène", "Contrôler et coordonner les fonctions du corps", "Produire les hormones", "Filtrer les déchets"],
+    "correctAnswerIndex": 1,
+    "explanation": "Le système nerveux central (encéphale et moelle épinière) contrôle et coordonne toutes les fonctions du corps humain."
+  }
+]
