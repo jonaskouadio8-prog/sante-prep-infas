@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Santé Prep - INFAS Côte d'Ivoire</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            infasGreen: '#059669',
+            infasDark: '#111827',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="h-full bg-slate-50 text-slate-900 font-sans antialiased flex flex-col">
+  <div id="app" class="w-full max-w-md mx-auto h-full flex flex-col bg-white shadow-xl overflow-hidden relative"></div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
