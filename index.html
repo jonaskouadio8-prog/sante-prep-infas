@@ -1,26 +1,217 @@
 <!DOCTYPE html>
-<html lang="fr" class="h-full">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Santé Prep - INFAS Côte d'Ivoire</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            infasGreen: '#059669',
-            infasDark: '#111827',
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Évaluation Interactive - Révision</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 16px;
+            padding-bottom: 80px;
         }
-      }
-    }
-  </script>
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+        }
+        .score-box {
+            display: none;
+            background: #27ae60;
+            color: white;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .question-card {
+            background: #ffffff;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 4px solid #3498db;
+        }
+        .question-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2c3e50;
+            font-size: 1rem;
+        }
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 6px 0;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .option-label:hover {
+            background-color: #f8f9fa;
+        }
+        .option-label input {
+            margin-right: 10px;
+        }
+        /* Styles pour la correction */
+        .correct {
+            background-color: #d4edda !important;
+            border-color: #28a745 !important;
+            color: #155724;
+            font-weight: bold;
+        }
+        .incorrect {
+            background-color: #f8d7da !important;
+            border-color: #dc3545 !important;
+            color: #721c24;
+        }
+        .explanation {
+            display: none;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #e8f4f8;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #2980b9;
+        }
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            position: fixed;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 90%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .btn-submit:active {
+            background-color: #1f618d;
+        }
+        #loading {
+            text-align: center;
+            color: #7f8c8d;
+            margin-top: 20px;
+        }
+    </style>
 </head>
-<body class="h-full bg-slate-50 text-slate-900 font-sans antialiased flex flex-col">
-  <div id="app" class="w-full max-w-md mx-auto h-full flex flex-col bg-white shadow-xl overflow-hidden relative"></div>
-  <script type="module" src="/src/main.ts"></script>
+<body>
+
+    <h1>Évaluation de Révision</h1>
+    
+    <div id="score-box" class="score-box"></div>
+    <div id="loading">Chargement des questions...</div>
+    <form id="quiz-form">
+        <div id="questions-container"></div>
+        <button type="button" id="submit-btn" class="btn-submit" onclick="calculerScore()">Valider et Corriger</button>
+    </form>
+
+    <script>
+        let questionsData = [];
+
+        fetch('questions.json')
+            .then(response => {
+                if (!response.ok) throw new Error("Fichier introuvable");
+                return response.json();
+            })
+            .then(data => {
+                questionsData = data;
+                const container = document.getElementById('questions-container');
+                document.getElementById('loading').style.display = 'none';
+                
+                data.forEach((item, qIndex) => {
+                    const card = document.createElement('div');
+                    card.className = 'question-card';
+                    card.id = `q-card-${qIndex}`;
+                    
+                    let html = `<div class="question-title">Question ${qIndex + 1} : ${item.question || item.text}</div>`;
+                    
+                    if (item.options && Array.isArray(item.options)) {
+                        item.options.forEach((opt, oIndex) => {
+                            html += `
+                                <label class="option-label" id="opt-label-${qIndex}-${oIndex}">
+                                    <input type="radio" name="question-${qIndex}" value="${oIndex}">
+                                    ${opt}
+                                </label>
+                            `;
+                        });
+                    }
+                    
+                    if (item.explication) {
+                        html += `<div class="explanation" id="exp-${qIndex} "><strong>Explication :</strong>   ${item.explication}</div>`;
+                    }
+                    
+                    card.innerHTML = html;
+                    container.appendChild(card);
+                });
+            })
+            .catch(error => {
+                 document.getElementById('loading').textContent = "Erreur lors du chargement des questions."; 
+                console.error(error);
+            });
+
+        function calculerScore() {
+            let score = 0;
+            
+            questionsData.forEach((item, qIndex) => {
+                const selected = document.querySelector(`input[name="question-${qIndex}"]:checked`);
+                const card = document.getElementById(`q-card-${qIndex}`);
+                 const repCorrecte = item.reponse; // Attend l'index ou la valeur de la bonne réponse  
+                
+                if (item.options && Array.isArray(item.options)) {
+                    item.options.forEach((opt, oIndex) => {
+                        const label = document.getElementById(`opt-label-${qIndex}-${oIndex}`);
+                        
+                          // Si c'est la bonne réponse // Si c'est la bonne réponse 
+                          if (oIndex === repCorrecte || opt === repCorrecte) {  
+                            label.classList.add('correct');
+                        }
+                        
+                         // Si l'utilisateur a choisi cette option et qu'elle est mauvaise  
+                        if (selected && parseInt(selected.value) === oIndex && (oIndex !== repCorrecte && opt !== repCorrecte)) {
+                            label.classList.add('incorrect');
+                        }
+                    });
+
+                     // Calcul du score  
+                    if (selected) {
+                        const selectedVal = parseInt(selected.value);
+                        if (selectedVal === repCorrecte || item.options[selectedVal] === repCorrecte) {
+                            score++;
+                        }
+                    }
+                }
+
+                 // Afficher l'explication si disponible  
+                const expDiv = document.getElementById(`exp-${qIndex}`);
+                if (expDiv) expDiv.style.display = 'block';
+            });
+
+            // Afficher le score global
+            const scoreBox = document.getElementById('score-box');
+            scoreBox.textContent = `Votre Score :  ${score} / ${questionsData.length}`;
+            scoreBox.style.display = 'block';
+
+             // Masquer le bouton ou le désactiver  
+            document.getElementById('submit-btn').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
 </body>
 </html>
